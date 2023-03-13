@@ -17,7 +17,6 @@ public class ServerSessionHandler extends BaseHandler<FullHttpRequest> {
     @Override
     protected void handleSession(ChannelHandlerContext ctx, Channel channel, FullHttpRequest fullHttpRequest) {
 
-
         FullHttpResponse fullHttpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
 
         String responseMessage = "你访问路径被好兄弟mango的网关管理了 URI：" + fullHttpRequest.uri();
