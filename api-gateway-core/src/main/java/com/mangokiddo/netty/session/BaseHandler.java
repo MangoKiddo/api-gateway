@@ -12,6 +12,11 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public abstract class BaseHandler<T> extends SimpleChannelInboundHandler<T> {
 
 
+    /**
+     * 重写channelRead0 方法自定义请求接受逻辑
+     * @param ctx
+     * @param msg
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, T msg) {
         handleSession(ctx, ctx.channel(), msg);

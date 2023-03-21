@@ -1,9 +1,13 @@
 package com.mangokiddo.netty.session.handlers;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.mangokiddo.netty.session.BaseHandler;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 
@@ -14,14 +18,15 @@ import java.util.Date;
  */
 public class ServerSessionHandler extends BaseHandler<FullHttpRequest> {
 
+    private final Logger logger = LoggerFactory.getLogger(ServerSessionHandler.class);
+
     @Override
     protected void handleSession(ChannelHandlerContext ctx, Channel channel, FullHttpRequest fullHttpRequest) {
 
         FullHttpResponse fullHttpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
 
-        String responseMessage = "你访问路径被好兄弟mango的网关管理了 URI：" + fullHttpRequest.uri();
 
-        fullHttpResponse.content().writeBytes(responseMessage.getBytes());
+        fullHttpResponse.content().writeBytes(JSON.toJSONBytes("你访问路径被好兄弟mango的网关管理了 URI：" + fullHttpRequest.uri(), SerializerFeature.PrettyFormat));
 
         HttpHeaders headers = fullHttpResponse.headers();
         headers.add(HttpHeaderNames.CONTENT_TYPE,HttpHeaderValues.APPLICATION_JSON + "; charset=utf-8");
@@ -30,7 +35,7 @@ public class ServerSessionHandler extends BaseHandler<FullHttpRequest> {
         //时间
         headers.add(HttpHeaderNames.DATE,new Date());
         //响应长度
-        headers.add(HttpHeaderNames.CONTENT_LENGTH,responseMessage.length());
+        headers.add(HttpHeaderNames.CONTENT_LENGTH,fullHttpResponse.content().readableBytes());
 
         // 配置跨域访问
         headers.add(HttpHeaderNames.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
@@ -40,6 +45,6 @@ public class ServerSessionHandler extends BaseHandler<FullHttpRequest> {
 
         //异步响应信息
 
-        channel.writeAndFlush(responseMessage);
+        channel.writeAndFlush(fullHttpResponse);
     }
 }
