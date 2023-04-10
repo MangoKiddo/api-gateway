@@ -1,4 +1,4 @@
-package com.mangokiddo.netty.session;
+package com.mangokiddo.gateway.session;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;

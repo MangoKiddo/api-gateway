@@ -1,11 +1,10 @@
-package com.mangokiddo.netty.session;
+package com.mangokiddo.gateway.session;
 
-import com.mangokiddo.netty.session.handlers.ServerSessionHandler;
+import com.mangokiddo.gateway.session.handlers.ServerSessionHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
-import io.netty.handler.codec.http.HttpRequestEncoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
 
 public class SessionChannelInitializer extends ChannelInitializer<SocketChannel> {

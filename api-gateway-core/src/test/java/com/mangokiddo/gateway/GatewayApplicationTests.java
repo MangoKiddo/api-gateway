@@ -1,20 +1,18 @@
-package com.mangokiddo.netty;
+package com.mangokiddo.gateway;
 
-import com.mangokiddo.netty.session.SessionServer;
+import com.mangokiddo.gateway.session.SessionServer;
 import io.netty.channel.Channel;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-class NettyApplicationTests {
+class GatewayApplicationTests {
 
-    private final Logger logger = LoggerFactory.getLogger(NettyApplicationTests.class);
+    private final Logger logger = LoggerFactory.getLogger(GatewayApplicationTests.class);
 
     @Test
     void contextLoads() throws ExecutionException, InterruptedException {
